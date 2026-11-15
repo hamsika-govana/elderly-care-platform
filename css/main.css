@@ -305,6 +305,28 @@ a:hover {
   border-color: var(--primary-border);
 }
 
+/* GitHub Header Link Pill */
+.github-header-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-muted);
+  border: 1px solid var(--border-light);
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.github-header-btn:hover {
+  background: #0F172A;
+  color: #FFFFFF;
+  border-color: #0F172A;
+}
+
 .notif-badge-count {
   position: absolute;
   top: -4px;
