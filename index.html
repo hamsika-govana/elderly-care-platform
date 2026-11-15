@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en" class="font-normal">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SilverCare - Smart Elderly Care & Medication Management Platform connecting seniors, caregivers, and families for safer, healthier living.">
+  <title>SilverCare | Smart Elderly Care & Medication Management Platform</title>
+
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/accessibility.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       Site Header & Navigation
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <!-- Brand Logo -->
+      <a href="#landing" class="brand-logo-wrap" data-page="landing" aria-label="SilverCare Home">
+        <div class="brand-icon-pulse">💊</div>
+        <div class="brand-text-col">
+          <span class="brand-title">SilverCare</span>
+          <span class="brand-tagline">Elderly Care & Health Hub</span>
+        </div>
+      </a>
+
+      <!-- Main Navigation Links -->
+      <nav class="main-nav" id="authNavLinks" style="display: none;" aria-label="Main Navigation">
+        <a href="#dashboard" class="nav-link" data-page="dashboard">
+          <span>🏠</span> Dashboard
+        </a>
+        <a href="#medications" class="nav-link" data-page="medications">
+          <span>💊</span> Medications
+        </a>
+        <a href="#appointments" class="nav-link" data-page="appointments">
+          <span>🩺</span> Appointments
+        </a>
+        <a href="#caregiver" class="nav-link" data-page="caregiver" id="navLinkCaregiver">
+          <span>👥</span> Family & Caregiver
+        </a>
+        <a href="#calendar" class="nav-link" data-page="calendar">
+          <span>📅</span> Calendar
+        </a>
+        <a href="#profile" class="nav-link" data-page="profile">
+          <span>📋</span> Health Profile
+        </a>
+      </nav>
+
+      <!-- Guest Navigation (Landing, Login, Register) -->
+      <div class="main-nav" id="guestNavLinks">
+        <a href="#landing" class="nav-link active" data-page="landing">Home</a>
+        <a href="#dashboard" class="nav-link" data-page="dashboard" style="color: var(--primary); font-weight: 700;">🚀 Live Demo</a>
+        <a href="#login" class="nav-link" data-page="login">Sign In</a>
+        <a href="#register" class="btn btn-sm btn-primary" data-page="register">Get Started</a>
+      </div>
+
+      <!-- Header Actions: Accessibility Controls, Role Switcher, SOS -->
+      <div class="header-actions">
+        <!-- Accessibility Controls -->
+        <div class="accessibility-bar" title="Elderly Accessibility Settings">
+          <button class="acc-btn active" data-font-size="normal" title="Normal Font Size">A</button>
+          <button class="acc-btn" data-font-size="large" title="Large Font Size">A+</button>
+          <button class="acc-btn" data-font-size="xlarge" title="Extra Large Font Size">A++</button>
+          <button class="acc-btn" id="highContrastToggle" title="Toggle High Contrast Mode (WCAG AAA)">🌓</button>
+          <button class="acc-btn" id="simplifiedModeToggle" title="Toggle Simplified Elderly Interface">👓</button>
+        </div>
+
+        <!-- Hackathon Quick-Role Switcher -->
+        <div class="role-switcher-box" id="roleSwitcherWrapper" title="Hackathon Judge Role Switcher">
+          <span class="role-switcher-label">🎭 Role:</span>
+          <select id="quickRoleSelect" class="role-select" aria-label="Quick Switch Active Role">
+            <option value="elderly">👴 Robert (Elderly Patient)</option>
+            <option value="caregiver">👩‍⚕️ Nurse Sarah (Caregiver)</option>
+            <option value="family">👩 Emily (Family Guardian)</option>
+          </select>
+        </div>
+
+        <!-- Notification Bell -->
+        <button class="notif-bell-btn" data-page="notifications" title="Notifications & Reminders" aria-label="Notifications">
+          🔔
+          <span class="notif-badge-count" id="navNotificationBadge" style="display: none;">0</span>
+        </button>
+
+        <!-- Emergency SOS Button in Header (Always Available) -->
+        <button class="header-sos-btn" data-page="emergency" aria-label="Emergency SOS">
+          🚨 SOS
+        </button>
+
+        <!-- Active User Profile Dropdown Pill -->
+        <div id="userProfileDropdown" style="display: none; align-items: center; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px; background: var(--bg-muted); padding: 4px 12px; border-radius: var(--radius-pill); border: 1px solid var(--border-light);">
+            <span id="headerUserAvatar" style="font-size: 1.2rem;">👴</span>
+            <div style="display: flex; flex-direction: column; line-height: 1.2;">
+              <span id="headerUserName" style="font-size: 0.85rem; font-weight: 700;">Robert Jenkins</span>
+              <span id="headerUserRole" style="font-size: 0.7rem; color: var(--text-muted); font-weight: 600;">ELDERLY</span>
+            </div>
+          </div>
+          <button class="btn btn-xs btn-outline-secondary" onclick="window.silverAuth.logout()" title="Sign Out">
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       Main Application Views Container
+       ========================================================================== -->
+  <main class="main-content" id="appMainContainer">
+    <div class="container">
+
+      <!-- ======================================================================
+           PAGE 1: LANDING PAGE
+           ====================================================================== -->
+      <section id="view-landing" class="view-page active">
+        <!-- Hero Section -->
+        <div class="landing-hero">
+          <div class="landing-hero-content">
+            <div class="hero-pill-badge">
+              <span>🌟</span> Connected Healthcare for Seniors & Families
+            </div>
+            <h1 class="landing-title">
+              Smart Medication Management & Care for <span>Elderly Loved Ones</span>
+            </h1>
+            <p class="landing-subtitle">
+              A comprehensive healthcare ecosystem that simplifies daily medication routines for seniors while keeping caregivers and family members informed, connected, and reassured every single day.
+            </p>
+            <div class="landing-cta-row">
+              <a href="#dashboard" class="btn btn-primary btn-lg" data-page="dashboard">
+                🚀 Launch Interactive Demo
+              </a>
+              <a href="#login" class="btn btn-outline-secondary btn-lg" data-page="login">
+                🔑 Sign In / Choose Role
+              </a>
+              <a href="#emergency" class="btn btn-outline-danger btn-lg" data-page="emergency">
+                🚨 Emergency SOS Hub
+              </a>
+            </div>
+          </div>
+
+          <!-- Hero Visual Mockup Card -->
+          <div class="landing-hero-visual">
+            <div class="hero-card-mockup">
+              <div class="mockup-header">
+                <div>
+                  <h3 style="font-size: 1.2rem;">Today's Health Routine</h3>
+                  <span class="text-muted" style="font-size: 0.85rem;">Robert Jenkins (Age 74)</span>
+                </div>
+                <span class="badge badge-success">93% Adherence 🔥</span>
+              </div>
+
+              <!-- Sample Medication Rows -->
+              <div class="mockup-med-item">
+                <div class="mockup-med-left">
+                  <div class="mockup-pill-icon">💊</div>
+                  <div>
+                    <strong style="font-size: 1rem; display: block;">Lisinopril 10mg</strong>
+                    <span class="text-muted" style="font-size: 0.8rem;">Blood Pressure • 08:00 AM</span>
+                  </div>
+                </div>
+                <span class="badge badge-success">✓ Taken</span>
+              </div>
+
+              <div class="mockup-med-item">
+                <div class="mockup-med-left">
+                  <div class="mockup-pill-icon" style="background: #ECFDF5; color: #10B981;">💊</div>
+                  <div>
+                    <strong style="font-size: 1rem; display: block;">Metformin 500mg</strong>
+                    <span class="text-muted" style="font-size: 0.8rem;">Blood Sugar • With Breakfast</span>
+                  </div>
+                </div>
+                <span class="badge badge-success">✓ Taken</span>
+              </div>
+
+              <div class="mockup-med-item" style="border-left: 4px solid var(--warning); background: #FFFBEB;">
+                <div class="mockup-med-left">
+                  <div class="mockup-pill-icon" style="background: #FEF3C7; color: #D97706;">⏰</div>
+                  <div>
+                    <strong style="font-size: 1rem; display: block;">Vitamin D3 & Calcium</strong>
+                    <span class="text-muted" style="font-size: 0.8rem;">After lunch • Due 01:00 PM</span>
+                  </div>
+                </div>
+                <button class="btn btn-xs btn-primary" onclick="window.silverApp.navigateTo('dashboard')">Mark Taken</button>
+              </div>
+
+              <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.85rem; color: var(--text-muted);">Caregiver: <b>Sarah Miller, RN</b></span>
+                <span class="badge badge-primary">GPS Monitored</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Problem & Solution Feature Cards -->
+        <div class="features-section">
+          <div class="section-heading-center">
+            <span class="badge badge-primary" style="margin-bottom: 10px;">Why SilverCare</span>
+            <h2>Bridging Independence & Peace of Mind</h2>
+            <p>Managing multiple medications, physician appointments, and health vitals is overwhelming for seniors and stressful for families. SilverCare connects everyone in real-time.</p>
+          </div>
+
+          <div class="features-grid">
+            <div class="feature-box">
+              <div class="feature-icon-wrap">💊</div>
+              <h3>Smart Medication Timers</h3>
+              <p>Visual, color-coded schedules with morning, afternoon, evening, and bedtime reminders. One-touch confirmation prevents missed or double doses.</p>
+            </div>
+
+            <div class="feature-box">
+              <div class="feature-icon-wrap" style="background: #F3E8FF; color: #7C3AED;">👨‍👩‍👧</div>
+              <h3>Family & Caregiver Portal</h3>
+              <p>Family members and visiting nurses can remotely monitor adherence scores, view missed dose alerts, and post shared health notes.</p>
+            </div>
+
+            <div class="feature-box">
+              <div class="feature-icon-wrap" style="background: #FEF2F2; color: #DC2626;">🚨</div>
+              <h3>Instant Emergency SOS</h3>
+              <p>One-touch SOS with a 5-second safety buffer immediately alerts family and caregivers with live GPS coordinates and first-responder medical data.</p>
+            </div>
+
+            <div class="feature-box">
+              <div class="feature-icon-wrap" style="background: #ECFDF5; color: #059669;">🩺</div>
+              <h3>Doctor Visit Preparation</h3>
+              <p>Keep track of doctor appointments, generate printable 14-day adherence dossiers, and list essential questions to ask the physician.</p>
+            </div>
+
+            <div class="feature-box">
+              <div class="feature-icon-wrap" style="background: #FEF3C7; color: #D97706;">🔊</div>
+              <h3>Voice-Guided Accessibility</h3>
+              <p>Built-in Text-to-Speech reads today's medications aloud for seniors with vision challenges. Includes high-contrast mode and font scaling.</p>
+            </div>
+
+            <div class="feature-box">
+              <div class="feature-icon-wrap" style="background: #EFF6FF; color: #2563EB;">📊</div>
+              <h3>Adherence Analytics</h3>
+              <p>Track weekly and monthly compliance trends, streak milestones, and low-stock inventory refill alerts before prescriptions run out.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ======================================================================
+           PAGE 2: LOGIN PAGE
+           ====================================================================== -->
+      <section id="view-login" class="view-page">
+        <div class="auth-wrapper">
+          <div class="auth-header">
+            <div class="brand-icon-pulse" style="margin: 0 auto 16px auto;">🔑</div>
+            <h2>Sign in to SilverCare</h2>
+            <p>Access your healthcare portal, medication schedule, and family dashboard.</p>
+          </div>
+
+          <!-- Hackathon Quick-Login Demonstration Tiles -->
+          <div class="demo-login-tiles-container">
+            <div class="demo-login-title">
+              <span>⚡ Hackathon Quick One-Click Demo Sign-in</span>
+            </div>
+            <div class="demo-tiles-grid">
+              <button class="demo-tile-btn" onclick="window.silverAuth.switchRole('elderly')">
+                <span class="demo-tile-avatar">👴</span>
+                <span class="demo-tile-name">Robert</span>
+                <span class="demo-tile-role">Elderly (Age 74)</span>
+              </button>
+              <button class="demo-tile-btn" onclick="window.silverAuth.switchRole('caregiver')">
+                <span class="demo-tile-avatar">👩‍⚕️</span>
+                <span class="demo-tile-name">Nurse Sarah</span>
+                <span class="demo-tile-role">Caregiver (RN)</span>
+              </button>
+              <button class="demo-tile-btn" onclick="window.silverAuth.switchRole('family')">
+                <span class="demo-tile-avatar">👩</span>
+                <span class="demo-tile-name">Emily</span>
+                <span class="demo-tile-role">Family Guardian</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="or-divider"><span>OR SIGN IN WITH CREDENTIALS</span></div>
+
+          <div id="loginErrorMessage" class="alert-banner alert-danger" style="display: none;"></div>
+
+          <form id="loginForm">
+            <div class="form-group">
+              <label class="form-label" for="loginEmailInput">Email Address</label>
+              <input type="email" id="loginEmailInput" class="form-control" placeholder="e.g. robert@silvercare.com" value="robert@silvercare.com" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="loginPasswordInput">Password</label>
+              <input type="password" id="loginPasswordInput" class="form-control" placeholder="••••••••" value="password123" required>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+              <label style="font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                <input type="checkbox" checked> Remember this device
+              </label>
+              <a href="javascript:alert('Demo password is: password123')" style="font-size: 0.9rem;">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-lg">
+              Sign In to Healthcare Hub
+            </button>
+          </form>
+
+          <p style="text-align: center; margin-top: 24px; font-size: 0.95rem;">
+            Don't have an account? <a href="#register" data-page="register">Create a new profile</a>
+          </p>
+        </div>
+      </section>
+
+
+      <!-- ======================================================================
+           PAGE 3: REGISTRATION PAGE
+           ====================================================================== -->
+      <section id="view-register" class="view-page">
+        <div class="auth-wrapper" style="max-width: 680px;">
+          <div class="auth-header">
+            <div class="brand-icon-pulse" style="margin: 0 auto 16px auto;">📝</div>
+            <h2>Register New Healthcare Profile</h2>
+            <p>Create a secure account for elderly individuals, caregivers, or family guardians.</p>
+          </div>
+
+          <div id="regErrorMessage" class="alert-banner alert-danger" style="display: none;"></div>
+
+          <form id="registrationForm">
+            <div class="form-group">
+              <label class="form-label" for="regRoleSelect">Account Type / Role</label>
+              <select id="regRoleSelect" class="form-control" required>
+                <option value="elderly">👴 Elderly Individual (Managing personal medications)</option>
+                <option value="caregiver">👩‍⚕️ Caregiver / Nurse (Managing patient care)</option>
+                <option value="family">👨‍👩‍👧 Family Member (Monitoring elderly loved one)</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="regNameInput">Full Legal Name</label>
+                <input type="text" id="regNameInput" class="form-control" placeholder="e.g. Robert Jenkins" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="regPhoneInput">Contact Phone Number</label>
+                <input type="tel" id="regPhoneInput" class="form-control" placeholder="e.g. (555) 789-0123" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="regEmailInput">Email Address</label>
+                <input type="email" id="regEmailInput" class="form-control" placeholder="e.g. name@example.com" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="regPasswordInput">Password (6+ characters)</label>
+                <input type="password" id="regPasswordInput" class="form-control" placeholder="Create a strong password" required minlength="6">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="regAddressInput">Living Address</label>
+              <input type="text" id="regAddressInput" class="form-control" placeholder="e.g. 742 Evergreen Terrace, Springfield, IL">
+            </div>
+
+            <div class="form-group">
+              <label style="font-size: 0.9rem; color: var(--text-muted); cursor: pointer; display: flex; align-items: flex-start; gap: 8px;">
+                <input type="checkbox" required checked style="margin-top: 4px;">
+                <span>I understand that SilverCare is an informational health platform and does not replace emergency medical diagnosis or physician advice.</span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top: 10px;">
+              Create Healthcare Profile
+            </button>
+          </form>
+
+          <p style="text-align: center; margin-top: 24px; font-size: 0.95rem;">
+            Already have an account? <a href="#login" data-page="login">Sign in here</a>
+          </p>
+        </div>
+      </section>
+
+
+      <!-- ======================================================================
+           PAGE 4: ELDERLY DASHBOARD
+           ====================================================================== -->
+      <section id="view-dashboard" class="view-page">
+        <!-- Welcoming Banner -->
+        <div class="dash-welcome-banner">
+          <div class="dash-greeting-content">
+            <h1 id="dashWelcomeGreeting">Good morning, Robert!</h1>
+            <p class="dash-date-str" id="dashCurrentDate">Sunday, November 15, 2026</p>
+            <div style="display: flex; gap: 10px; margin-top: 12px; align-items: center; flex-wrap: wrap;">
+              <span class="badge badge-success" id="dashStreakBadge">5 Day Perfect Streak 🔥</span>
+              <span class="badge badge-primary">Adherence Score: <strong id="dashAdherenceScoreNum">93%</strong></span>
+              <span id="ttsActiveStatus" style="display: none; align-items: center; gap: 6px; background: rgba(255,255,255,0.25); padding: 4px 10px; border-radius: var(--radius-pill); font-size: 0.85rem; color: #FFF;">
+                🔊 Voice Assistant Speaking...
+              </span>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-end;">
+            <button class="dash-voice-btn" id="readScheduleAloudBtn" title="Listen to today's schedule">
+              <span>🔊</span> Read My Schedule Aloud
+            </button>
+            <button class="btn btn-sm btn-outline-primary" style="background: rgba(255,255,255,0.9); color: var(--primary);" onclick="window.silverApp.incrementWater()">
+              💧 + Log Glass of Water
+            </button>
+          </div>
+        </div>
+
+        <!-- Today Progress Tracker -->
+        <div class="dash-today-progress-card">
+          <div class="progress-header-row">
+            <div>
+              <h3 style="font-size: 1.25rem;">Today's Medication Progress</h3>
+              <p class="text-muted" id="dashTodayProgressLabel">2 of 4 doses completed</p>
+            </div>
+            <button class="btn btn-sm btn-outline-primary" onclick="window.silverApp.navigateTo('medications')">
+              Manage Prescriptions &rarr;
+            </button>
+          </div>
+          <div class="progress-track-large">
+            <div class="progress-fill-large" id="dashTodayProgressFill" style="width: 50%;"></div>
+          </div>
+        </div>
+
+        <!-- Today's Scheduled Medications Grouped by Timing -->
+        <div class="page-header" style="margin-bottom: 16px;">
+          <div class="page-title-group">
+            <h2>📅 Today's Medication Schedule</h2>
+            <p>Click "Mark as Taken" after swallowing each medicine. Timings match your physician's prescription.</p>
+          </div>
+        </div>
+
+        <div id="todayMedicationsSchedule">
+          <!-- Dynamically populated by silverApp.renderTodayMedicationCards() -->
+        </div>
+
+        <!-- Bottom Grid: Next Doctor Visit & Daily Health Routine -->
+        <div class="dash-bottom-grid">
+          <!-- Next Doctor Appointment Card -->
+          <div class="card">
+            <div class="card-header-flex">
+              <div>
+                <h3>🩺 Upcoming Doctor Appointment</h3>
+                <p class="text-muted">Nearest scheduled clinical visit</p>
+              </div>
+              <button class="btn btn-sm btn-outline-primary" onclick="window.silverApp.navigateTo('appointments')">All Visits</button>
+            </div>
+
+            <div id="dashNextAptCard">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Daily Health Routine & Vitals Overview -->
+          <div class="card">
+            <div class="card-header-flex">
+              <div>
+                <h3>❤️ Daily Health Vitals & Routine</h3>
+                <p class="text-muted">Recorded health metrics</p>
+              </div>
+              <button class="btn btn-sm btn-outline-primary" onclick="window.silverCaregiver.openVitalsModal()">+ Log Vitals</button>
+            </div>
+
+            <div class="vitals-stat-grid">
+              <div class="vital-metric-card">
+                <span class="vital-metric-label">Blood Pressure</span>
+                <span class="vital-metric-value" id="dashVitalBP">118/76 mmHg</span>
+                <span class="badge badge-success" style="width: fit-content;">Optimal</span>
+              </div>
+              <div class="vital-metric-card">
+                <span class="vital-metric-label">Blood Sugar (Fasting)</span>
+                <span class="vital-metric-value" id="dashVitalSugar">104 mg/dL</span>
+                <span class="badge badge-neutral" style="width: fit-content;">Normal</span>
+              </div>
+              <div class="vital-metric-card">
+                <span class="vital-metric-label">Hydration Goal</span>
+                <span class="vital-metric-value" id="dashVitalWater">5 / 8 glasses</span>
+                <button class="btn btn-xs btn-outline-primary" onclick="window.silverApp.incrementWater()" style="margin-top: 4px;">+1 Glass</button>
+              </div>
+              <div class="vital-metric-card">
+                <span class="vital-metric-label">Daily Steps</span>
+                <span class="vital-metric-value" id="dashVitalSteps">2,340 steps</span>
+                <span class="badge badge-info" style="width: fit-content;">Garden Walk</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Emergency Access Banner on Dashboard -->
+        <div class="alert-banner alert-warning" style="margin-top: 32px; justify-content: space-between; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <span style="font-size: 2rem;">🚨</span>
+            <div>
+              <strong style="font-size: 1.15rem;">Emergency Assistance Hotline:</strong>
+              <p style="margin: 0; font-size: 0.95rem;">If experiencing chest pain, severe fall, or acute distress, trigger the emergency protocol.</p>
+            </div>
+          </div>
+          <button class="btn btn-danger" onclick="window.silverEmergency.promptSosConfirmation()">
+            Trigger Emergency SOS
+          </button>
+        </div>
+      </section>
+
+
+      <!-- ======================================================================
+           PAGE 5: MEDICATION MANAGEMENT PAGE
+           ====================================================================== -->
+      <section id="view-medications" class="view-page">
+        <div class="page-header">
+          <div class="page-title-group">
+            <h1>💊 Medication Management & Inventory</h1>
+            <p>Add, edit, review, and track active prescriptions, dosage timings, and pill refill counts.</p>
+          </div>
+          <div class="header-action-group">
+            <button class="btn btn-primary" onclick="window.silverMeds.openAddModal()">
+              ➕ Add New Medication
+            </button>
+          </div>
+        </div>
+
+        <!-- Low Stock Warning Banner -->
+        <div id="medLowStockBanner" style="display: none;"></div>
+
+        <!-- Controls Bar: Search & Timing Filter -->
+        <div class="meds-control-bar">
+          <div class="search-input-wrap">
+            <span class="search-icon-pos">🔍</span>
+            <input type="text" id="medSearchInput" class="form-control" placeholder="Search by medicine or doctor..." oninput="window.silverMeds.searchQuery = this.value; window.silverMeds.renderMedicationsPage();">
+          </div>
+
+          <div class="med-filter-pills">
+            <button class="filter-pill active" onclick="document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active')); this.classList.add('active'); window.silverMeds.currentFilter = 'all'; window.silverMeds.renderMedicationsPage();">All Times</button>
+            <button class="filter-pill" onclick="document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active')); this.classList.add('active'); window.silverMeds.currentFilter = 'morning'; window.silverMeds.renderMedicationsPage();">🌅 Morning</button>
+            <button class="filter-pill" onclick="document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active')); this.classList.add('active'); window.silverMeds.currentFilter = 'afternoon'; window.silverMeds.renderMedicationsPage();">☀️ Afternoon</button>
+            <button class="filter-pill" onclick="document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active')); this.classList.add('active'); window.silverMeds.currentFilter = 'evening'; window.silverMeds.renderMedicationsPage();">🌇 Evening</button>
+            <button class="filter-pill" onclick="document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active')); this.classList.add('active'); window.silverMeds.currentFilter = 'bedtime'; window.silverMeds.renderMedicationsPage();">🌙 Bedtime</button>
+          </div>
+        </div>
+
+        <!-- Medication Cards Grid -->
+        <div class="meds-cards-grid" id="medicationsListGrid">
+          <!-- Dynamically populated by silverMeds.renderMedicationsPage() -->
+        </div>
+      </section>
+
+
+      <!-- ======================================================================
+           PAGE 6: DOCTOR APPOINTMENT MANAGEMENT PAGE
+           ====================================================================== -->
+      <section id="view-appointments" class="view-page">
+        <div class="page-header">
+          <div class="page-title-group">
+            <h1>🩺 Doctor Appointment Management</h1>
+            <p>Schedule visits, track clinics and physician contacts, and prepare question checklists.</p>
+          </div>
+          <button class="btn btn-primary" onclick="window.silverApts.openAddModal()">
+            ➕ Schedule New Doctor Visit
+          </button>
+        </div>
+
+        <!-- Tabs: Upcoming vs Past -->
+        <div class="med-filter-pills" style="margin-bottom: 24px;">
+          <button class="filter-pill active" id="aptTabUpcoming" onclick="document.getElementById('aptTabPast').classList.remove('active'); this.classList.add('active'); window.silverApts.currentTab = 'upcoming'; window.silverApts.renderAppointmentsPage();">
+            Upcoming Appointments
+          </button>
+          <button class="filter-pill" id="aptTabPast" onclick="document.getElementById('aptTabUpcoming').classList.remove('active'); this.classList.add('active'); window.silverApts.currentTab = 'past'; window.silverApts.renderAppointmentsPage();">
+            Past Visit History
+          </button>
+        </div>
+
+        <!-- Appointments List Grid -->
+        <div class="appointments-grid" id="appointmentsListContainer">
+          <!-- Dynamically populated by silverApts.renderAppointmentsPage() -->
+        </div>
+      </section>
+
+
+      <!-- ======================================================================
+           PAGE 7: FAMILY & CAREGIVER DASHBOARD
+           ====================================================================== -->
+      <section id="view-caregiver" class="view-page">
+        <div class="page-header">
+          <div class="page-title-group">
+            <h1>👥 Family & Caregiver Oversight Hub</h1>
+            <p>Real-time adherence analytics, caregiver alert monitoring, and care team communication.</p>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-outline-primary" onclick="window.silverNotifications.simulateEmailDispatch()">
+              ✉️ Email Daily Digest
+            </button>
+            <button class="btn btn-primary" onclick="window.silverCaregiver.openNewNoteModal()">
+              ➕ Post Care Update
+            </button>
+          </div>
+        </div>
+
+        <div id="caregiverViewContainer">
+          <!-- Dynamically populated by silverCaregiver.renderCaregiverPage() -->
+        </div>
+      </section>
+
+
+      <!-- ======================================================================
+           PAGE 8: HEALTH PROFILE PAGE
+           ====================================================================== -->
+      <section id="view-profile" class="view-page">
+        <div class="page-header">
+          <div class="page-title-group">
+            <h1>📋 Patient Health Profile & Dossier</h1>
+            <p>Secure personal healthcare records, emergency hospital contacts, allergies, and chronic diagnoses.</p>
+          </div>
+        </div>
+
+        <div id="profileRbacBanner"></div>
+
+        <form id="healthProfileForm">
+          <!-- Personal Identity Card -->
+          <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header-flex">
+              <h3>1. Personal Identity & Residence</h3>
+              <span class="badge badge-primary">Confidential</span>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="profNameInput">Full Legal Name</label>
+                <input type="text" id="profNameInput" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profPreferredInput">Preferred Nickname</label>
+                <input type="text" id="profPreferredInput" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profDobInput">Date of Birth</label>
+                <input type="date" id="profDobInput" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profAgeInput">Age (Years)</label>
+                <input type="number" id="profAgeInput" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="profBloodGroupInput">Blood Group</label>
+                <select id="profBloodGroupInput" class="form-control">
+                  <option value="O+">O Positive (O+)</option>
+                  <option value="O-">O Negative (O-)</option>
+                  <option value="A+">A Positive (A+)</option>
+                  <option value="A-">A Negative (A-)</option>
+                  <option value="B+">B Positive (B+)</option>
+                  <option value="B-">B Negative (B-)</option>
+                  <option value="AB+">AB Positive (AB+)</option>
+                  <option value="AB-">AB Negative (AB-)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profHeightInput">Height</label>
+                <input type="text" id="profHeightInput" class="form-control" placeholder="e.g. 5' 10&quot;">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profWeightInput">Weight</label>
+                <input type="text" id="profWeightInput" class="form-control" placeholder="e.g. 168 lbs">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profPhoneInput">Primary Contact Phone</label>
+                <input type="tel" id="profPhoneInput" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group" style="grid-column: 1 / -1;">
+                <label class="form-label" for="profAddressInput">Living Address</label>
+                <input type="text" id="profAddressInput" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="profInsuranceInput">Health Insurance Provider</label>
+                <input type="text" id="profInsuranceInput" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profPolicyInput">Policy / Member ID</label>
+                <input type="text" id="profPolicyInput" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profHospitalInput">Preferred Emergency Hospital</label>
+                <input type="text" id="profHospitalInput" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <!-- Emergency Contacts & Care Team Card -->
+          <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header-flex">
+              <h3>2. Emergency Contacts & Care Team</h3>
+              <span class="badge badge-success">Verified</span>
+            </div>
+
+            <h4 style="margin-bottom: 12px; color: var(--secondary);">Primary Family Contact (Guardian)</h4>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="profContactNameInput">Guardian Name</label>
+                <input type="text" id="profContactNameInput" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profContactRelInput">Relationship</label>
+                <input type="text" id="profContactRelInput" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profContactPhoneInput">Emergency Phone</label>
+                <input type="tel" id="profContactPhoneInput" class="form-control">
+              </div>
+            </div>
+
+            <h4 style="margin: 16px 0 12px 0; color: var(--primary);">Assigned Home Health Nurse / Caregiver</h4>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="profNurseNameInput">Caregiver Name</label>
+                <input type="text" id="profNurseNameInput" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profNurseOrgInput">Organization / Agency</label>
+                <input type="text" id="profNurseOrgInput" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profNursePhoneInput">Caregiver Direct Line</label>
+                <input type="tel" id="profNursePhoneInput" class="form-control">
+              </div>
+            </div>
+
+            <h4 style="margin: 16px 0 12px 0; color: #059669;">Primary Care Physician</h4>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="profDocNameInput">Doctor Name</label>
+                <input type="text" id="profDocNameInput" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profDocSpecInput">Clinical Specialty</label>
+                <input type="text" id="profDocSpecInput" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profDocPhoneInput">Clinic Phone</label>
+                <input type="tel" id="profDocPhoneInput" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <!-- Allergies & Chronic Conditions Card -->
+          <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header-flex">
+              <div>
+                <h3>3. Known Allergies & Chronic Diagnoses</h3>
+                <p class="text-muted">Critical drug sensitivities and long-term managed health conditions</p>
+              </div>
+            </div>
+
+            <!-- Allergies List -->
+            <div style="margin-bottom: 20px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <label class="form-label" style="margin: 0;">Drug & Food Allergies:</label>
+                <button type="button" class="btn btn-xs btn-outline-danger" onclick="window.silverApp.addAllergyPrompt()">+ Add Allergy</button>
+              </div>
+              <div id="profileAllergiesList" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+            </div>
+
+            <!-- Chronic Conditions List -->
+            <div style="margin-bottom: 20px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <label class="form-label" style="margin: 0;">Diagnosed Chronic Conditions:</label>
+                <button type="button" class="btn btn-xs btn-outline-primary" onclick="window.silverApp.addConditionPrompt()">+ Add Condition</button>
+              </div>
+              <div id="profileConditionsList" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+            </div>
+
+            <!-- Lifestyle Notes -->
+            <div class="form-group">
+              <label class="form-label" for="profLifestyleInput">Lifestyle & Daily Mobility Notes</label>
+              <textarea id="profLifestyleInput" class="form-control" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 12px; margin-bottom: 40px;">
+            <button type="button" class="btn btn-outline-secondary" onclick="window.silverApp.renderHealthProfile()">Reset Changes</button>
+            <button type="submit" class="btn btn-primary btn-lg">💾 Save Profile Updates</button>
+          </div>
+        </form>
+      </section>
+
+
+      <!-- ======================================================================
+           PAGE 9: NOTIFICATIONS & REMINDERS PAGE
+           ====================================================================== -->
+      <section id="view-notifications" class="view-page">
+        <div class="page-header">
+          <div class="page-title-group">
+            <h1>🔔 Notifications & Smart Reminder System</h1>
+            <p>Real-time reminder center, missed dose escalation alerts, and automated email dispatches.</p>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-outline-secondary" onclick="window.silverStore.markAllNotificationsRead(); window.silverNotifications.renderNotificationsPage();">
+              Mark All Read
+            </button>
+            <button class="btn btn-outline-danger" onclick="window.silverStore.clearNotifications(); window.silverNotifications.renderNotificationsPage();">
+              Clear All
+            </button>
+          </div>
+        </div>
+
+        <!-- Interactive Simulation Control Box for Demonstrations -->
+        <div class="card" style="margin-bottom: 24px; background: var(--secondary-light); border-color: var(--secondary-border);">
+          <div class="card-header-flex">
+            <div>
+              <h3 style="color: var(--secondary);">⚡ Interactive Hackathon Reminder Simulator</h3>
+              <p class="text-muted">Trigger real-time reminders, missed dose alerts, and audio chimes on demand:</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button class="btn btn-primary" onclick="window.silverNotifications.simulateDoseReminder()">
+              ⏰ Test Medication Due Reminder
+            </button>
+            <button class="btn btn-outline-danger" onclick="window.silverNotifications.simulateMissedDose()">
+              ⚠️ Simulate Missed Dose Escalation
+            </button>
+            <button class="btn btn-outline-primary" onclick="window.silverNotifications.simulateEmailDispatch('emily.daughter@silvercare.com')">
+              ✉️ Preview Dispatched Family Email
+            </button>
+          </div>
+        </div>
+
+        <!-- Notification Filters -->
+        <div class="med-filter-pills" style="margin-bottom: 20px;">
+          <button class="filter-pill active" onclick="document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active')); this.classList.add('active'); window.silverNotifications.renderNotificationsPage('all');">All Alerts</button>
+          <button class="filter-pill" onclick="document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active')); this.classList.add('active'); window.silverNotifications.renderNotificationsPage('medication');">💊 Medication Reminders</button>
+          <button class="filter-pill" onclick="document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active')); this.classList.add('active'); window.silverNotifications.renderNotificationsPage('missed_dose');">⚠️ Missed Doses</button>
+          <button class="filter-pill" onclick="document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active')); this.classList.add('active'); window.silverNotifications.renderNotificationsPage('appointment');">🩺 Appointments</button>
+          <button class="filter-pill" onclick="document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active')); this.classList.add('active'); window.silverNotifications.renderNotificationsPage('refill');">📦 Low Stock Refills</button>
+        </div>
+
+        <!-- Notifications List -->
+        <div id="notificationsListContainer">
+          <!-- Dynamically populated by silverNotifications.renderNotificationsPage() -->
+        </div>
+      </section>
+
+
+      <!-- ======================================================================
+           PAGE 10: EMERGENCY SUPPORT PAGE
+           ====================================================================== -->
+      <section id="view-emergency" class="view-page">
+        <div id="emergencyViewContainer">
+          <!-- Dynamically populated by silverEmergency.renderEmergencyPage() -->
+        </div>
+      </section>
+
+
+      <!-- ======================================================================
+           PAGE 11: INTERACTIVE CALENDAR VIEW
+           ====================================================================== -->
+      <section id="view-calendar" class="view-page">
+        <div class="page-header">
+          <div class="page-title-group">
+            <h1>📅 Comprehensive Health & Medication Calendar</h1>
+            <p>Visual monthly overview of daily medication regimens and upcoming doctor appointments.</p>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-outline-primary" onclick="window.silverApts.openAddModal()">
+              ➕ Schedule Appointment
+            </button>
+          </div>
+        </div>
+
+        <div class="calendar-wrapper">
+          <div class="calendar-top-bar">
+            <h2 id="calendarMonthYearTitle" style="font-size: 1.6rem;">November 2026</h2>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-sm btn-outline-secondary" onclick="window.silverApp.calendarPrevMonth()">&larr; Previous</button>
+              <button class="btn btn-sm btn-outline-secondary" onclick="window.silverApp.calendarCurrentMonth = new Date().getMonth(); window.silverApp.calendarCurrentYear = new Date().getFullYear(); window.silverApp.renderCalendarView();">Today</button>
+              <button class="btn btn-sm btn-outline-secondary" onclick="window.silverApp.calendarNextMonth()">Next &rarr;</button>
+            </div>
+          </div>
+
+          <div class="calendar-weekdays-row">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+          </div>
+
+          <div class="calendar-days-grid" id="calendarDaysGrid">
+            <!-- Dynamically populated by silverApp.renderCalendarView() -->
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       MODAL 1: ADD / EDIT MEDICATION
+       ========================================================================== -->
+  <div class="modal-backdrop" id="medicationModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="medModalTitle">Add New Medication</h3>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <form id="medicationForm">
+        <div class="modal-body">
+          <input type="hidden" id="medIdInput">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="medNameInput">Medicine Name *</label>
+              <input type="text" id="medNameInput" class="form-control" placeholder="e.g. Lisinopril" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="medDosageInput">Dosage / Strength *</label>
+              <input type="text" id="medDosageInput" class="form-control" placeholder="e.g. 10 mg" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="medCategoryInput">Therapeutic Category</label>
+              <input type="text" id="medCategoryInput" class="form-control" placeholder="e.g. Blood Pressure">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="medFrequencySelect">Frequency</label>
+              <select id="medFrequencySelect" class="form-control">
+                <option value="Once Daily">Once Daily</option>
+                <option value="Twice Daily">Twice Daily</option>
+                <option value="Three Times Daily">Three Times Daily</option>
+                <option value="As Needed (PRN)">As Needed (PRN)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="medTimeSlotSelect">Daily Time Slot</label>
+              <select id="medTimeSlotSelect" class="form-control">
+                <option value="Morning">🌅 Morning</option>
+                <option value="Afternoon">☀️ Afternoon</option>
+                <option value="Evening">🌇 Evening</option>
+                <option value="Bedtime">🌙 Bedtime</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="medExactTimeInput">Scheduled Clock Time</label>
+              <input type="time" id="medExactTimeInput" class="form-control" value="08:00">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="medFoodTimingInput">Food Instructions</label>
+              <input type="text" id="medFoodTimingInput" class="form-control" placeholder="e.g. Take with breakfast">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="medPillsRemainingInput">Pill Stock Remaining</label>
+              <input type="number" id="medPillsRemainingInput" class="form-control" value="30" min="1">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="medPrescribedByInput">Prescribing Physician</label>
+              <input type="text" id="medPrescribedByInput" class="form-control" placeholder="e.g. Dr. Angela Martinez">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="medColorSelect">Color Tag / Marker</label>
+              <select id="medColorSelect" class="form-control">
+                <option value="#3B82F6">Blue</option>
+                <option value="#10B981">Green</option>
+                <option value="#8B5CF6">Purple</option>
+                <option value="#F59E0B">Amber</option>
+                <option value="#EF4444">Red</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="medInstructionsInput">Special Precautions / Notes</label>
+            <textarea id="medInstructionsInput" class="form-control" rows="2" placeholder="e.g. Take with full glass of water. Avoid grapefruit juice."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary modal-close-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Medication</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 2: ADD / EDIT APPOINTMENT
+       ========================================================================== -->
+  <div class="modal-backdrop" id="appointmentModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="aptModalTitle">Schedule Doctor Appointment</h3>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <form id="appointmentForm">
+        <div class="modal-body">
+          <input type="hidden" id="aptIdInput">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="aptDoctorNameInput">Doctor Name *</label>
+              <input type="text" id="aptDoctorNameInput" class="form-control" placeholder="e.g. Dr. Angela Martinez" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="aptSpecialtyInput">Specialty *</label>
+              <input type="text" id="aptSpecialtyInput" class="form-control" placeholder="e.g. Cardiology" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="aptHospitalInput">Clinic / Hospital Name *</label>
+              <input type="text" id="aptHospitalInput" class="form-control" placeholder="e.g. City Heart Institute" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="aptPhoneInput">Clinic Phone Number</label>
+              <input type="tel" id="aptPhoneInput" class="form-control" placeholder="e.g. (555) 998-1234">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="aptAddressInput">Clinic Address</label>
+            <input type="text" id="aptAddressInput" class="form-control" placeholder="e.g. 100 Medical Center Way">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="aptDateInput">Appointment Date *</label>
+              <input type="date" id="aptDateInput" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="aptTimeInput">Appointment Time *</label>
+              <input type="time" id="aptTimeInput" class="form-control" value="10:00" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="aptPurposeInput">Purpose / Reason for Visit</label>
+            <input type="text" id="aptPurposeInput" class="form-control" placeholder="e.g. 6-Month Blood Pressure Check">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="aptQuestionsInput">Questions Checklist to Ask Doctor (one per line)</label>
+            <textarea id="aptQuestionsInput" class="form-control" rows="3" placeholder="e.g. Should I adjust Lisinopril dose if systolic pressure stays below 120?"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="checkbox" id="aptReminderCheck" checked>
+              <span>Enable automatic notification reminders 24h & 2h before appointment</span>
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary modal-close-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Confirm Appointment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 3: ADD CAREGIVER NOTE
+       ========================================================================== -->
+  <div class="modal-backdrop" id="careNoteModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Post Care Team Update</h3>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <form id="careNoteForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="noteTitleInput">Subject / Summary</label>
+            <input type="text" id="noteTitleInput" class="form-control" placeholder="e.g. Morning Vitals & Walk Summary" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="noteContentInput">Detailed Clinical or Family Notes</label>
+            <textarea id="noteContentInput" class="form-control" rows="4" placeholder="e.g. Patient took morning medications without issue. Assisted with 20 minutes of leg exercises..." required></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary modal-close-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Publish Note</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 4: LOG VITALS
+       ========================================================================== -->
+  <div class="modal-backdrop" id="vitalsModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Log Daily Health Vitals</h3>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <form id="vitalsForm">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="systolicInput">Systolic BP (mmHg)</label>
+              <input type="number" id="systolicInput" class="form-control" placeholder="e.g. 118" min="60" max="240" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="diastolicInput">Diastolic BP (mmHg)</label>
+              <input type="number" id="diastolicInput" class="form-control" placeholder="e.g. 76" min="40" max="150" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="glucoseInput">Fasting Glucose (mg/dL)</label>
+              <input type="number" id="glucoseInput" class="form-control" placeholder="e.g. 104" min="40" max="400" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="waterInput">Water Intake (Glasses)</label>
+              <input type="number" id="waterInput" class="form-control" min="0" max="20" value="5">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="stepsInput">Daily Step Count</label>
+            <input type="number" id="stepsInput" class="form-control" placeholder="e.g. 2340">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary modal-close-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Vitals</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       Site Footer
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="medical-disclaimer-box">
+        <strong>⚠️ Medical & Legal Disclaimer:</strong> SilverCare is an informational scheduling, tracking, and communication tool designed to assist elderly individuals, caregivers, and family members. It does not provide medical diagnoses, alter clinical prescriptions, or replace professional medical consultations. For medical emergencies, call 911 immediately.
+      </div>
+      <p class="footer-copy">
+        &copy; 2026 SilverCare Healthcare Technologies. Built for Hackathon Demonstration.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Core JavaScript Modules (Executed in Dependency Order) -->
+  <script src="js/store.js"></script>
+  <script src="js/accessibility.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/medications.js"></script>
+  <script src="js/appointments.js"></script>
+  <script src="js/caregiver.js"></script>
+  <script src="js/emergency.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

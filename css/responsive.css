@@ -1,0 +1,136 @@
+/* ==========================================================================
+   SilverCare - Responsive Design Rules (Mobile, Tablet, Desktop)
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .landing-hero {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .caregiver-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .caregiver-split-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .responder-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .dash-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .emergency-alert-hero {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-inner {
+    height: auto;
+    padding: 12px 0;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .brand-logo-wrap {
+    order: 1;
+  }
+
+  .header-actions {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .main-nav {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    white-space: nowrap;
+  }
+
+  .accessibility-bar {
+    display: none; /* Can be toggled via drawer or settings if needed */
+  }
+
+  .landing-title {
+    font-size: 2.4rem;
+  }
+
+  .demo-tiles-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .today-dose-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dose-card-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .btn-take-med {
+    flex: 1;
+  }
+
+  .calendar-days-grid {
+    gap: 4px;
+  }
+
+  .calendar-day-cell {
+    min-height: 70px;
+    padding: 4px;
+  }
+
+  .cal-events-wrap {
+    display: none; /* Too cramped on small mobile; day details modal works on click */
+  }
+
+  .calendar-day-cell::after {
+    content: '•';
+    color: var(--primary);
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .landing-title {
+    font-size: 2rem;
+  }
+
+  .dash-welcome-banner {
+    padding: 24px 20px;
+  }
+
+  .dash-greeting-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .big-sos-button {
+    width: 180px;
+    height: 180px;
+  }
+
+  .sos-text {
+    font-size: 1.2rem;
+  }
+
+  .vitals-stat-grid {
+    grid-template-columns: 1fr;
+  }
+}
